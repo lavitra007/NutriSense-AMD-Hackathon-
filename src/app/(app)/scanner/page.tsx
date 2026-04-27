@@ -56,8 +56,28 @@ export default function ScannerPage() {
     setError(null);
   };
 
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setCapturedImage(base64String);
+        handleScan(base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="flex-1 bg-black flex overflow-hidden relative">
+      <input 
+        type="file" 
+        accept="image/*" 
+        id="file-upload" 
+        className="hidden" 
+        onChange={handleUpload} 
+      />
       {/* Main Camera Area */}
       <div className="flex-1 relative flex flex-col items-center justify-center">
         {!capturedImage ? (
@@ -68,6 +88,10 @@ export default function ScannerPage() {
               screenshotFormat="image/jpeg"
               className="absolute inset-0 w-full h-full object-cover opacity-80"
               videoConstraints={{ facingMode: 'environment' }}
+              onUserMediaError={(err) => {
+                console.error('Camera error:', err);
+                setError('Failed to access camera. Please ensure you have granted permission and have a working camera.');
+              }}
             />
             {/* Viewfinder Overlay */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none p-10">
@@ -107,7 +131,10 @@ export default function ScannerPage() {
                 >
                   <Camera className="w-8 h-8" />
                 </button>
-                <button className="text-white text-sm underline decoration-white/40 hover:decoration-white transition-all">
+                <button 
+                  onClick={() => document.getElementById('file-upload')?.click()}
+                  className="text-white text-sm underline decoration-white/40 hover:decoration-white transition-all"
+                >
                   Upload image instead
                 </button>
               </>

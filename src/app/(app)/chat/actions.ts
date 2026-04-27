@@ -5,43 +5,48 @@ import { getChatResponse } from '@/lib/ai/gemini';
 import { revalidatePath } from 'next/cache';
 
 export async function sendChatMessage(content: string, history: any[]) {
-  const supabase = await createClient();
-  
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error('Not authenticated');
+  try {
+    const supabase = await createClient();
+    
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
 
-  // Save user message
-  const { error: userMsgError } = await supabase
-    .from('chat_messages')
-    .insert({
-      user_id: user.id,
-      role: 'user',
-      content: content
-    });
+    // Save user message
+    const { error: userMsgError } = await supabase
+      .from('chat_messages')
+      .insert({
+        user_id: user.id,
+        role: 'user',
+        content: content
+      });
 
-  if (userMsgError) throw userMsgError;
+    if (userMsgError) throw userMsgError;
 
-  // Format history for Gemini
-  const geminiHistory = history.map(m => ({
-    role: m.role === 'user' ? 'user' : 'model' as 'user' | 'model',
-    parts: m.content
-  }));
+    // Format history for Gemini
+    const geminiHistory = history.map(m => ({
+      role: m.role === 'user' ? 'user' : 'model' as 'user' | 'model',
+      parts: m.content
+    }));
 
-  const aiResponse = await getChatResponse(content, geminiHistory);
+    const aiResponse = await getChatResponse(content, geminiHistory);
 
-  // Save AI response
-  const { error: aiMsgError } = await supabase
-    .from('chat_messages')
-    .insert({
-      user_id: user.id,
-      role: 'assistant',
-      content: aiResponse
-    });
+    // Save AI response
+    const { error: aiMsgError } = await supabase
+      .from('chat_messages')
+      .insert({
+        user_id: user.id,
+        role: 'assistant',
+        content: aiResponse
+      });
 
-  if (aiMsgError) throw aiMsgError;
+    if (aiMsgError) throw aiMsgError;
 
-  revalidatePath('/chat');
-  return aiResponse;
+    revalidatePath('/chat');
+    return { success: true, response: aiResponse };
+  } catch (error: any) {
+    console.error('Chat error:', error);
+    return { success: false, error: error.message || 'Failed to send message' };
+  }
 }
 
 export async function getChatHistory() {

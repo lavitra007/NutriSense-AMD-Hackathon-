@@ -49,8 +49,12 @@ export default function ChatPage() {
     setIsTyping(true);
 
     try {
-      const response = await sendChatMessage(input, messages);
-      setMessages(prev => [...prev, { role: 'assistant', content: response, created_at: new Date().toISOString() }]);
+      const result = await sendChatMessage(input, messages);
+      if (result.success) {
+        setMessages(prev => [...prev, { role: 'assistant', content: result.response, created_at: new Date().toISOString() }]);
+      } else {
+        setError(result.error || 'Failed to send message');
+      }
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to send message';
       setError(errorMessage);
@@ -118,6 +122,12 @@ export default function ChatPage() {
           ref={scrollRef}
           className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth"
         >
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded-xl text-sm flex items-center justify-between">
+              <span>{error}</span>
+              <button onClick={() => setError(null)} className="font-bold">×</button>
+            </div>
+          )}
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full text-center p-8 space-y-4">
               <div className="w-16 h-16 bg-[#1e6b47]/10 rounded-full flex items-center justify-center">

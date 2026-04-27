@@ -52,6 +52,25 @@ export default function ProgressPage() {
     );
   }
 
+  if (!stats) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center bg-[#f7faf5] p-10 text-center">
+        <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+          <Activity className="w-10 h-10 text-gray-300" />
+        </div>
+        <h2 className="text-xl font-bold text-gray-900">No Statistics Available</h2>
+        <p className="text-sm text-gray-500 mt-2 max-w-xs">Log some meals to see your nutritional insights and progress over time.</p>
+        <Button 
+          onClick={() => window.location.reload()} 
+          variant="outline" 
+          className="mt-6 border-[#1e6b47] text-[#1e6b47] hover:bg-[#1e6b47] hover:text-white"
+        >
+          Try Refreshing
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 md:p-10 max-w-7xl mx-auto w-full space-y-8 bg-[#f7faf5] min-h-screen">
       {/* Header */}
