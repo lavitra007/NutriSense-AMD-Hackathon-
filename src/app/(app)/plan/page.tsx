@@ -7,20 +7,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function MealPlanPage() {
   const [plan, setPlan] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [regenerating, setRegenerating] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState<any>(null);
 
   useEffect(() => {
     async function fetchPlan() {
       try {
+        setError(null);
         const data = await getMealPlan();
         setPlan(data);
         // Default select the first meal of the first day
         if (data?.days?.[0]?.meals?.[0]) {
           setSelectedMeal(data.days[0].meals[0]);
         }
-      } catch (error) {
-        console.error('Failed to fetch plan:', error);
+      } catch (err: any) {
+        console.error('Failed to fetch plan:', err);
+        setError(err.message || 'Failed to fetch meal plan');
       } finally {
         setLoading(false);
       }
@@ -31,13 +34,15 @@ export default function MealPlanPage() {
   const handleRegenerate = async () => {
     setRegenerating(true);
     try {
+      setError(null);
       const data = await regenerateMealPlan();
       setPlan(data);
       if (data?.days?.[0]?.meals?.[0]) {
         setSelectedMeal(data.days[0].meals[0]);
       }
-    } catch (error) {
-      console.error('Failed to regenerate plan:', error);
+    } catch (err: any) {
+      console.error('Failed to regenerate plan:', err);
+      setError(err.message || 'Failed to regenerate meal plan');
     } finally {
       setRegenerating(false);
     }
@@ -56,6 +61,19 @@ export default function MealPlanPage() {
 
   return (
     <div className="flex-1 flex flex-col min-w-0 bg-[#f7faf5] h-full overflow-hidden">
+      {/* Error Message */}
+      {error && (
+        <div className="bg-red-50 border-b border-red-200 px-6 py-3 flex items-center justify-between text-red-700">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-sm">error</span>
+            <p className="text-xs font-medium">{error}</p>
+          </div>
+          <button onClick={() => setError(null)} className="text-red-400 hover:text-red-600 transition-colors">
+            <span className="material-symbols-outlined text-sm">close</span>
+          </button>
+        </div>
+      )}
+
       {/* Top Bar */}
       <header className="flex-shrink-0 flex justify-between items-center px-6 py-4 border-b border-[#e0e3de] bg-white">
         <div>
