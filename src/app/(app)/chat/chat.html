@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NutriSense AI - NutriAI Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#181d19",
+                    "surface-container-highest": "#e0e3de",
+                    "secondary-fixed": "#ffdad2",
+                    "surface-bright": "#f7faf5",
+                    "on-surface-variant": "#3f4942",
+                    "surface-container-low": "#f1f5ef",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#753136",
+                    "on-primary-fixed-variant": "#005232",
+                    "surface-container-high": "#e6e9e4",
+                    "primary-fixed": "#a7f3c5",
+                    "on-tertiary-container": "#ffcccd",
+                    "surface-container": "#ecefe9",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#3c0700",
+                    "outline": "#707a71",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#bfc9c0",
+                    "on-primary": "#ffffff",
+                    "background": "#f7faf5",
+                    "primary": "#005232",
+                    "surface-tint": "#1e6b47",
+                    "primary-fixed-dim": "#8bd6aa",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2d312e",
+                    "on-tertiary-fixed": "#3c060e",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#181d19",
+                    "surface-variant": "#e0e3de",
+                    "on-secondary-container": "#661300",
+                    "primary-container": "#1e6b47",
+                    "secondary-container": "#ff6e49",
+                    "surface-dim": "#d8dbd6",
+                    "secondary": "#ad3313",
+                    "tertiary-container": "#92484c",
+                    "on-primary-container": "#9de9bb",
+                    "inverse-primary": "#8bd6aa",
+                    "tertiary-fixed": "#ffdada",
+                    "on-primary-fixed": "#002111",
+                    "on-secondary-fixed-variant": "#891d00",
+                    "secondary-fixed-dim": "#ffb4a2",
+                    "inverse-on-surface": "#eef2ec",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb3b4",
+                    "on-tertiary-fixed-variant": "#753136",
+                    "surface": "#f7faf5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "xs": "4px",
+                    "margin": "24px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "base": "4px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "button": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "button": ["15px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      body { background-color: #FDFAF5; }
+    </style>
+</head>
+<body class="bg-[#FDFAF5] text-on-surface font-body-base h-screen overflow-hidden flex flex-col md:flex-row">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-64 border-r border-[#E8E2D9] dark:border-slate-800 bg-[#FFFFFF] dark:bg-slate-900 z-40">
+<div class="p-lg flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl">
+                N
+            </div>
+<div>
+<h1 class="text-xl font-bold text-[#1E6B47] dark:text-emerald-400 tracking-tight font-title-sm">NutriSense AI</h1>
+<p class="font-body-sm text-xs text-outline">The Empathetic Expert</p>
+</div>
+</div>
+<div class="px-md mb-lg">
+<button class="w-full bg-primary-container text-on-primary py-sm px-md rounded-lg font-button flex items-center justify-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Log Meal
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto py-sm flex flex-col gap-xs px-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="instascan">document_scanner</span>
+                AI Scanner
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#1E6B47] dark:text-emerald-400 bg-[#FDFAF5] dark:bg-emerald-950/30 border-r-4 border-[#1E6B47] font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+                NutriAI Chat
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="monitoring">monitoring</span>
+                Weekly Progress
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="calendar_month">calendar_month</span>
+                Meal Plan
+            </a>
+</div>
+<div class="p-sm border-t border-[#E8E2D9] dark:border-slate-800 flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col h-full bg-[#FDFAF5]">
+<!-- TopNavBar (Mobile only, hidden on Desktop as per rules, assuming Desktop view for this task based on prompt) -->
+<header class="md:hidden flex justify-between items-center px-lg h-16 w-full fixed top-0 bg-[#FFFFFF]/80 backdrop-blur-md z-50 border-b border-[#E8E2D9]">
+<div class="text-xl font-bold text-[#1E6B47] tracking-tight font-title-sm">NutriSense AI</div>
+<div class="flex gap-md text-[#1E6B47]">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</header>
+<div class="flex-1 flex flex-row overflow-hidden mt-0 md:mt-0">
+<!-- Left Panel: Quick Actions & Snapshot -->
+<aside class="w-[320px] hidden lg:flex flex-col border-r border-[#E8E2D9] bg-surface-container-lowest overflow-y-auto">
+<div class="p-lg flex-1">
+<h2 class="font-title-sm text-on-surface mb-md">Quick actions</h2>
+<div class="flex flex-wrap gap-sm">
+<button class="px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-body-sm border border-[#E8E2D9] hover:bg-surface-container transition-colors text-left">
+                            What should I eat for dinner?
+                        </button>
+<button class="px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-body-sm border border-[#E8E2D9] hover:bg-surface-container transition-colors text-left">
+                            Am I on track today?
+                        </button>
+<button class="px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-body-sm border border-[#E8E2D9] hover:bg-surface-container transition-colors text-left">
+                            Healthier version of biryani?
+                        </button>
+<button class="px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-body-sm border border-[#E8E2D9] hover:bg-surface-container transition-colors text-left">
+                            Post-workout meal ideas
+                        </button>
+<button class="px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-body-sm border border-[#E8E2D9] hover:bg-surface-container transition-colors text-left">
+                            I'm craving something sweet
+                        </button>
+<button class="px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-body-sm border border-[#E8E2D9] hover:bg-surface-container transition-colors text-left">
+                            Weekly summary
+                        </button>
+</div>
+<div class="mt-xl">
+<h2 class="font-title-sm text-on-surface mb-md">Today's snapshot</h2>
+<div class="bg-surface-container-lowest border border-[#E8E2D9] rounded-xl p-md flex flex-col gap-md">
+<!-- Calorie Bar -->
+<div>
+<div class="flex justify-between font-label-caps text-outline mb-xs">
+<span>CALORIES</span>
+<span>1450 / 2000 kcal</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[72%] rounded-full"></div>
+</div>
+</div>
+<!-- Macros Grid -->
+<div class="grid grid-cols-3 gap-sm">
+<div>
+<div class="font-label-caps text-outline mb-xs">PROTEIN</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden mb-1">
+<div class="h-full bg-secondary-container w-[80%] rounded-full"></div>
+</div>
+<div class="font-body-sm text-on-surface-variant text-xs">80g</div>
+</div>
+<div>
+<div class="font-label-caps text-outline mb-xs">CARBS</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden mb-1">
+<div class="h-full bg-[#E0A800] w-[60%] rounded-full"></div> <!-- Example accent color for carbs -->
+</div>
+<div class="font-body-sm text-on-surface-variant text-xs">150g</div>
+</div>
+<div>
+<div class="font-label-caps text-outline mb-xs">FATS</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden mb-1">
+<div class="h-full bg-[#5D8AA8] w-[45%] rounded-full"></div> <!-- Example accent color for fats -->
+</div>
+<div class="font-body-sm text-on-surface-variant text-xs">40g</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right Panel: Chat Interface -->
+<section class="flex-1 flex flex-col bg-[#FDFAF5] relative">
+<!-- Chat Header (Mobile visible, Desktop subtle context) -->
+<div class="px-lg py-md border-b border-[#E8E2D9] bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">
+                            N
+                        </div>
+<div>
+<h2 class="font-title-sm text-on-surface">NutriAI</h2>
+<p class="font-label-caps text-primary-container">ONLINE</p>
+</div>
+</div>
+<button class="text-outline hover:text-on-surface">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-lg flex flex-col gap-lg">
+<!-- Date Divider -->
+<div class="flex justify-center">
+<span class="font-label-caps text-outline bg-surface-container-low px-sm py-xs rounded-full">TODAY, 10:42 AM</span>
+</div>
+<!-- User Message -->
+<div class="flex justify-end">
+<div class="bg-primary-container text-on-primary font-body-base px-md py-sm rounded-2xl rounded-tr-sm max-w-[80%] lg:max-w-[60%]">
+                            I'm looking for a healthy dinner option. I have some paneer and mint in the fridge.
+                        </div>
+</div>
+<!-- AI Message Container -->
+<div class="flex justify-start gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shrink-0 mt-1">
+                            N
+                        </div>
+<div class="flex flex-col gap-sm max-w-[85%] lg:max-w-[70%]">
+<div class="bg-surface-container-lowest border border-[#1E6B47] text-on-surface font-body-base px-md py-sm rounded-2xl rounded-tl-sm shadow-sm">
+                                That sounds perfect! Paneer is a great source of protein, and mint aids digestion. Here is a delicious and healthy suggestion for dinner:
+                            </div>
+<!-- Rich Meal Suggestion Card -->
+<div class="bg-surface-container-lowest border-2 border-l-primary-container border-y-[#E8E2D9] border-r-[#E8E2D9] rounded-xl overflow-hidden shadow-sm">
+<div class="p-md flex flex-col sm:flex-row gap-md">
+<div class="w-full sm:w-24 h-24 bg-surface-container-low rounded-lg overflow-hidden shrink-0">
+<img alt="Grilled paneer cubes marinated in spices, served with vibrant green mint chutney on a rustic plate" class="w-full h-full object-cover" data-alt="close up shot of grilled paneer tikka cubes with grill marks alongside vibrant green mint chutney on a ceramic plate, warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR6sQfknmEg_1t8Md2EnggWtpy-88mJEskH0xxhRZnsIZvK-S60zf89OKjxe9gpo4LFF1gxD00AxyC4Ft6-0ywlsl0K6V42ulD5vZAdYSMhRaqE-Nl6UFpGJctzNwG7veIm7tytfc2ti6Z2jyq8EMTKA58yFV7AFm79jlu9I-LWpEhIxh0gxAqqMy7jyLoqSbqbBaeUlPP79H6mLSJ1Lr3E7IZHfwDXlEsW7K65-zSBqIIHQwnTyn25n1idMFeQQ-aGkePmX6ojIk"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-title-sm text-on-surface mb-xs">Grilled Paneer Tikka + Mint Chutney</h3>
+<p class="font-body-sm text-on-surface-variant mb-sm">Lightly grilled to preserve nutrients, paired with fresh homemade chutney.</p>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-sm">
+<div class="flex gap-sm">
+<span class="font-label-caps text-on-surface bg-surface-container px-2 py-1 rounded">280 kcal</span>
+<span class="font-label-caps text-primary-container bg-primary-container/10 px-2 py-1 rounded">P: 22g</span>
+<span class="font-label-caps text-[#A67C00] bg-[#FFF8E1] px-2 py-1 rounded">C: 12g</span>
+<span class="font-label-caps text-[#3D5A80] bg-[#E0F7FA] px-2 py-1 rounded">F: 18g</span>
+</div>
+<button class="bg-primary-container text-on-primary font-button px-sm py-xs rounded-lg flex items-center gap-xs hover:opacity-90">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+                                                Log this
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Typing Indicator -->
+<div class="flex justify-start gap-sm items-center mt-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shrink-0">
+                            N
+                        </div>
+<div class="bg-surface-container-lowest border border-[#E8E2D9] px-md py-sm rounded-2xl rounded-tl-sm flex gap-1 items-center h-10">
+<div class="w-1.5 h-1.5 bg-outline rounded-full"></div>
+<div class="w-1.5 h-1.5 bg-outline rounded-full opacity-70"></div>
+<div class="w-1.5 h-1.5 bg-outline rounded-full opacity-40"></div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-lg bg-surface-container-lowest border-t border-[#E8E2D9]">
+<div class="flex items-end gap-sm relative">
+<div class="flex-1 relative">
+<textarea class="w-full bg-surface-container-low border border-[#E8E2D9] rounded-xl pl-md pr-12 py-sm font-body-base text-on-surface focus:border-primary-container focus:ring-0 resize-none min-h-[48px] max-h-[120px] outline-none transition-colors" placeholder="Ask NutriAI anything..." rows="1"></textarea>
+<button class="absolute right-sm bottom-1.5 p-sm text-outline hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="mic">mic</span>
+</button>
+</div>
+<button class="bg-[#E85D3A] text-[#FFFFFF] w-12 h-12 rounded-xl flex items-center justify-center hover:opacity-90 transition-opacity shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="send">send</span>
+</button>
+</div>
+<div class="text-center mt-sm">
+<span class="font-label-caps text-outline text-[10px]">AI RESPONSES MAY NOT BE 100% ACCURATE. CONSULT A DOCTOR FOR MEDICAL ADVICE.</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

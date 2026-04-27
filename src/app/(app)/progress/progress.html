@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Weekly Progress Analytics - NutriSense AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#181d19",
+                      "surface-container-highest": "#e0e3de",
+                      "secondary-fixed": "#ffdad2",
+                      "surface-bright": "#f7faf5",
+                      "on-surface-variant": "#3f4942",
+                      "surface-container-low": "#f1f5ef",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#753136",
+                      "on-primary-fixed-variant": "#005232",
+                      "surface-container-high": "#e6e9e4",
+                      "primary-fixed": "#a7f3c5",
+                      "on-tertiary-container": "#ffcccd",
+                      "surface-container": "#ecefe9",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#3c0700",
+                      "outline": "#707a71",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#bfc9c0",
+                      "on-primary": "#ffffff",
+                      "background": "#f7faf5",
+                      "primary": "#005232",
+                      "surface-tint": "#1e6b47",
+                      "primary-fixed-dim": "#8bd6aa",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#2d312e",
+                      "on-tertiary-fixed": "#3c060e",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-background": "#181d19",
+                      "surface-variant": "#e0e3de",
+                      "on-secondary-container": "#661300",
+                      "primary-container": "#1e6b47",
+                      "secondary-container": "#ff6e49",
+                      "surface-dim": "#d8dbd6",
+                      "secondary": "#ad3313",
+                      "tertiary-container": "#92484c",
+                      "on-primary-container": "#9de9bb",
+                      "inverse-primary": "#8bd6aa",
+                      "tertiary-fixed": "#ffdada",
+                      "on-primary-fixed": "#002111",
+                      "on-secondary-fixed-variant": "#891d00",
+                      "secondary-fixed-dim": "#ffb4a2",
+                      "inverse-on-surface": "#eef2ec",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb3b4",
+                      "on-tertiary-fixed-variant": "#753136",
+                      "surface": "#f7faf5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xs": "4px",
+                      "margin": "24px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "base": "4px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-base": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "button": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "title-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "button": ["15px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { background-color: #f7faf5; }
+        .border-system { border-color: #E8E2D9; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base antialiased selection:bg-primary-container selection:text-on-primary-container flex min-h-screen">
+<!-- SideNavBar -->
+<nav class="flex flex-col fixed left-0 top-0 h-full w-64 border-r border-[#E8E2D9] dark:border-slate-800 bg-[#FFFFFF] dark:bg-slate-900 z-40 hidden md:flex">
+<div class="px-6 py-8 border-b border-[#E8E2D9] dark:border-slate-800">
+<div class="flex items-center gap-3">
+<img alt="NutriSense AI Logo" class="w-10 h-10 rounded-lg object-cover" data-alt="A stylized green leaf forming an abstract brain shape, clean modern vector logo style on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9ZHEQ-qMbVt8OC9A5dy_N2HDk2wX8dLCWoMTFwAcXUouSNaKYQx9g8NkdH1WOon9mcmE_ezetITA2vhruSAEC4Ug98CDR7XuyxlyAZohmucKTNIUE9moa7kgKAexG3w3_UqQfSVVR6lgVE5GTzjhz0nsqNeOERWz8I2QnmlO28T7I-C6sPiEPALDX5fbrw5EN1k6j62KRBstctJ0t0i4Pp8oHNiorAu8pECIfWrVmzHOLEFTQSOH1tO6cjKq8M42cJ3OpA74EAj4"/>
+<div>
+<h1 class="text-xl font-bold text-[#1E6B47] dark:text-emerald-400 tracking-tight">NutriSense AI</h1>
+<p class="font-label-caps text-label-caps text-outline">The Empathetic Expert</p>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-body-sm text-body-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">photoscan</span>
+<span class="font-body-sm text-body-sm font-medium">AI Scanner</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chat_bubble</span>
+<span class="font-body-sm text-body-sm font-medium">NutriAI Chat</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#1E6B47] dark:text-emerald-400 bg-[#FDFAF5] dark:bg-emerald-950/30 border-r-4 border-[#1E6B47] scale-98 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<span class="font-body-sm text-body-sm font-medium">Weekly Progress</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">calendar_month</span>
+<span class="font-body-sm text-body-sm font-medium">Meal Plan</span>
+</a>
+</div>
+<div class="p-6 border-t border-[#E8E2D9] dark:border-slate-800 space-y-4">
+<button class="w-full bg-primary-container text-on-primary font-button text-button py-3 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Log Meal
+            </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-body-sm text-body-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-body-sm text-body-sm">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (Mobile Only Context) -->
+<header class="md:hidden flex justify-between items-center px-6 h-16 w-full fixed top-0 bg-[#FFFFFF]/80 backdrop-blur-md z-50 border-b border-[#E8E2D9]">
+<h1 class="text-xl font-bold text-[#1E6B47]">NutriSense AI</h1>
+<div class="flex items-center gap-4">
+<button class="text-[#6B6560] hover:text-[#1E6B47]">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-[#E8E2D9]" data-alt="Close up portrait of a young Indian woman smiling warmly, soft natural lighting, white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByeyd0Vl4quAkUGtnAveDOjfeAtgHNlv8yneyP1mfKPH7aOnNDiKb7l8iFHMRJJdH1rD95E5O1DlVQaJFhqCcp8oyV5kc0zWLnnVxJidDpf992JhSgzfJ62J7u2dzxaeFkv1Y8kxYPHIDBjuaBPYlApPro6tuf-jzaO4ucPn_fZAX1FsxcsFh9z88d3zPdEds1JuODBm3jQf1AfiQMuHwBgeuHv8MO4C_NfDZNxlHgvXs18XQTMJDMQpcuTJtUC-9oWrXJVcjg5K4"/>
+</div>
+</header>
+<div class="p-6 md:p-8 lg:p-10 pt-24 md:pt-10 max-w-7xl mx-auto w-full space-y-8">
+<!-- Header & Week Selector -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Weekly Progress</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Review your nutritional journey and habit formation.</p>
+</div>
+<div class="flex items-center bg-surface-container-lowest border border-system rounded-lg p-1">
+<button class="p-2 text-outline hover:text-on-surface hover:bg-surface-container-low rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<span class="font-button text-button text-on-surface px-4">Apr 14–20, 2026</span>
+<button class="p-2 text-outline hover:text-on-surface hover:bg-surface-container-low rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Row 1: Summary Cards (Bento style) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest border border-system rounded-xl p-5 flex flex-col justify-between h-32 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-surface-container-low rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+<span class="font-label-caps text-label-caps text-outline relative z-10 uppercase tracking-wider">Avg Daily Cals</span>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-display-lg text-display-lg text-on-surface">1,840</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">kcal</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-system rounded-xl p-5 flex flex-col justify-between h-32 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow border-l-2 border-l-primary-container relative overflow-hidden">
+<span class="font-label-caps text-label-caps text-outline relative z-10 uppercase tracking-wider">Protein Goal Days</span>
+<div class="flex items-end justify-between relative z-10">
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg text-on-surface">5</span>
+<span class="font-body-base text-body-base text-on-surface-variant">/7</span>
+</div>
+<span class="material-symbols-outlined text-primary-container mb-1" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-system rounded-xl p-5 flex flex-col justify-between h-32 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow border-l-2 border-l-secondary-container">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Clean Eating Days</span>
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg text-on-surface">4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-2 bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full">Target: 5</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-system rounded-xl p-5 flex flex-col justify-between h-32 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed/20 to-transparent z-0"></div>
+<span class="font-label-caps text-label-caps text-outline relative z-10 uppercase tracking-wider">NutriScore</span>
+<div class="flex items-center gap-3 relative z-10">
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#E8E2D9" stroke-width="3"></path>
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#1E6B47" stroke-dasharray="74, 100" stroke-width="3"></path>
+</svg>
+<span class="absolute font-title-sm text-title-sm text-primary-container">74</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/100</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Large Bar Chart -->
+<div class="bg-surface-container-lowest border border-system rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-sm text-title-sm text-on-surface">Calorie Intake vs Target</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded-sm bg-primary-container"></div><span class="font-label-caps text-label-caps text-outline">On Target</span></div>
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded-sm bg-secondary-container"></div><span class="font-label-caps text-label-caps text-outline">+10-25%</span></div>
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded-sm bg-error"></div><span class="font-label-caps text-label-caps text-outline">&gt;25% Over</span></div>
+</div>
+</div>
+<div class="h-64 relative flex items-end justify-between pt-6 px-2">
+<!-- Target Line -->
+<div class="absolute top-24 left-0 w-full border-t-2 border-dashed border-outline-variant z-0">
+<span class="absolute -top-6 right-0 font-label-caps text-label-caps text-outline-variant bg-surface-container-lowest px-2">Target: 2000 kcal</span>
+</div>
+<!-- Bars -->
+<div class="w-1/12 flex flex-col items-center gap-2 z-10 group">
+<span class="font-label-caps text-label-caps text-transparent group-hover:text-on-surface-variant transition-colors absolute -top-4">1950</span>
+<div class="w-full bg-primary-container rounded-t-md h-[70%] hover:opacity-90 transition-opacity"></div>
+<span class="font-body-sm text-body-sm text-outline">Mon</span>
+</div>
+<div class="w-1/12 flex flex-col items-center gap-2 z-10 group">
+<span class="font-label-caps text-label-caps text-transparent group-hover:text-on-surface-variant transition-colors absolute -top-4">1880</span>
+<div class="w-full bg-primary-container rounded-t-md h-[65%] hover:opacity-90 transition-opacity"></div>
+<span class="font-body-sm text-body-sm text-outline">Tue</span>
+</div>
+<div class="w-1/12 flex flex-col items-center gap-2 z-10 group">
+<span class="font-label-caps text-label-caps text-transparent group-hover:text-on-surface-variant transition-colors absolute -top-4">2250</span>
+<div class="w-full bg-secondary-container rounded-t-md h-[85%] hover:opacity-90 transition-opacity"></div>
+<span class="font-body-sm text-body-sm text-outline">Wed</span>
+</div>
+<div class="w-1/12 flex flex-col items-center gap-2 z-10 group">
+<span class="font-label-caps text-label-caps text-transparent group-hover:text-on-surface-variant transition-colors absolute -top-4">2600</span>
+<div class="w-full bg-error rounded-t-md h-[95%] hover:opacity-90 transition-opacity"></div>
+<span class="font-body-sm text-body-sm text-outline">Thu</span>
+</div>
+<div class="w-1/12 flex flex-col items-center gap-2 z-10 group">
+<span class="font-label-caps text-label-caps text-transparent group-hover:text-on-surface-variant transition-colors absolute -top-4">2050</span>
+<div class="w-full bg-primary-container rounded-t-md h-[75%] hover:opacity-90 transition-opacity"></div>
+<span class="font-body-sm text-body-sm text-outline">Fri</span>
+</div>
+<div class="w-1/12 flex flex-col items-center gap-2 z-10 group">
+<span class="font-label-caps text-label-caps text-transparent group-hover:text-on-surface-variant transition-colors absolute -top-4">1900</span>
+<div class="w-full bg-primary-container rounded-t-md h-[68%] hover:opacity-90 transition-opacity"></div>
+<span class="font-body-sm text-body-sm text-outline">Sat</span>
+</div>
+<div class="w-1/12 flex flex-col items-center gap-2 z-10 group">
+<span class="font-label-caps text-label-caps text-transparent group-hover:text-on-surface-variant transition-colors absolute -top-4">2150</span>
+<div class="w-full bg-secondary-container rounded-t-md h-[80%] hover:opacity-90 transition-opacity"></div>
+<span class="font-body-sm text-body-sm text-outline">Sun</span>
+</div>
+</div>
+</div>
+<!-- Row 3: Behavioral Insights & Meal Highlights -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Left: Behavioral Insights -->
+<div class="bg-surface-container-lowest border border-system rounded-xl p-6 flex flex-col gap-4">
+<h3 class="font-title-sm text-title-sm text-on-surface mb-2">Behavioral Insights</h3>
+<div class="p-4 border border-system rounded-lg border-l-4 border-l-primary-container bg-surface-bright flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-container mt-0.5">trending_up</span>
+<div>
+<h4 class="font-button text-button text-on-surface">Protein consistency is up 15%</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">You've hit your 120g target more frequently than last week.</p>
+</div>
+</div>
+<div class="p-4 border border-system rounded-lg border-l-4 border-l-secondary-container bg-surface-bright flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary-container mt-0.5">dark_mode</span>
+<div>
+<h4 class="font-button text-button text-on-surface">Late night snacking pattern detected</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Carb-heavy snacks observed after 9 PM on Thursday and Sunday.</p>
+</div>
+</div>
+<div class="p-4 border border-system rounded-lg border-l-4 border-l-[#4F84CD] bg-surface-bright flex items-start gap-4">
+<span class="material-symbols-outlined text-[#4F84CD] mt-0.5">water_drop</span>
+<div>
+<h4 class="font-button text-button text-on-surface">Hydration needs attention</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Average intake dropped below 2L on active days.</p>
+</div>
+</div>
+</div>
+<!-- Right: Meal Highlights -->
+<div class="flex flex-col gap-6">
+<div class="bg-surface-container-lowest border border-system rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-32 h-full opacity-10 pointer-events-none">
+<img alt="Biryani pattern" class="w-full h-full object-cover mix-blend-multiply grayscale" data-alt="Close up texture of aromatic biryani rice with spices, soft lighting, abstract culinary background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmIl-y3QSrHwWP7GSGQUKYYzoKLXc8DQi6bF30B39mm1BG5HjC_mVaaNqy-o6kNeQIHC5VoUKIvnMGRqfy3tFSwOQaruVwwsXzwsEmZyca2e13KNMRbYD7xIPX3S9UtKiuv71yN5pnnoZJuE0_BHDQCGIeki_A-iCPaDwAJvPKXOhzw2JQL4Z60_lCTeYbiGa803_2-h_Wwpa4GfEk16kqWOic1LLE_4s40MGxsLHLCXjP8PmdZplw_e0paMXgRfvEear0IsEg9L8"/>
+</div>
+<h3 class="font-label-caps text-label-caps text-outline uppercase mb-4">Worst Meal This Week</h3>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">warning</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Biryani</h4>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-sm text-body-sm text-error font-medium">1,100 kcal</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Thursday Dinner</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-system rounded-xl p-6">
+<h3 class="font-label-caps text-label-caps text-outline uppercase mb-4">Best Day</h3>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center">
+<span class="font-headline-md text-headline-md">TUE</span>
+</div>
+<div>
+<h4 class="font-title-sm text-title-sm text-on-surface">Perfectly Balanced</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">All macros within 5% of target</p>
+</div>
+</div>
+<button class="text-primary-container hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 4: Projected Impact -->
+<div class="bg-[#FDFAF5] border border-primary-container/20 rounded-xl p-6 relative overflow-hidden">
+<div class="absolute -right-10 -bottom-10 opacity-5">
+<span class="material-symbols-outlined text-[160px] text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h3 class="font-title-sm text-title-sm text-primary-container mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">insights</span>
+                    Projected Impact
+                </h3>
+<p class="font-body-base text-body-base text-on-surface mb-6">If you maintain this week's habits for 3 months:</p>
+<div class="flex flex-wrap gap-4 md:gap-8">
+<div class="bg-white/60 backdrop-blur-sm border border-primary-container/10 px-4 py-3 rounded-lg flex-1 min-w-[200px]">
+<span class="font-label-caps text-label-caps text-outline block mb-1">Projected Weight Change</span>
+<span class="font-headline-md text-headline-md text-primary-container">-1.8 kg</span>
+</div>
+<div class="bg-white/60 backdrop-blur-sm border border-primary-container/10 px-4 py-3 rounded-lg flex-1 min-w-[200px]">
+<span class="font-label-caps text-label-caps text-outline block mb-1">Protein Adherence</span>
+<span class="font-headline-md text-headline-md text-on-surface">85%</span>
+</div>
+<div class="bg-white/60 backdrop-blur-sm border border-primary-container/10 px-4 py-3 rounded-lg flex-1 min-w-[200px]">
+<span class="font-label-caps text-label-caps text-outline block mb-1">NutriScore</span>
+<span class="font-headline-md text-headline-md text-on-surface">82</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full border-t border-[#E8E2D9] dark:border-slate-800 bg-[#FDFAF5] dark:bg-slate-950 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-8 w-full max-w-7xl mx-auto">
+<div class="mb-6 md:mb-0 text-center md:text-left">
+<span class="font-bold text-[#1E6B47] dark:text-emerald-400 block mb-2">NutriSense AI</span>
+<p class="font-['Inter'] text-xs text-[#6B6560] dark:text-slate-500">© 2024 NutriSense AI. Premium Nutrition for Urban India.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-['Inter'] text-xs text-[#6B6560] dark:text-slate-500 hover:text-[#1E6B47] dark:hover:text-emerald-400 transition-colors opacity-100 hover:opacity-80" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs text-[#6B6560] dark:text-slate-500 hover:text-[#1E6B47] dark:hover:text-emerald-400 transition-colors opacity-100 hover:opacity-80" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs text-[#6B6560] dark:text-slate-500 hover:text-[#1E6B47] dark:hover:text-emerald-400 transition-colors opacity-100 hover:opacity-80" href="#">Contact Us</a>
+<a class="font-['Inter'] text-xs text-[#6B6560] dark:text-slate-500 hover:text-[#1E6B47] dark:hover:text-emerald-400 transition-colors opacity-100 hover:opacity-80" href="#">Careers</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

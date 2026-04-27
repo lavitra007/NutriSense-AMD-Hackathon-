@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Scanner - NutriSense AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#181d19",
+                        "surface-container-highest": "#e0e3de",
+                        "secondary-fixed": "#ffdad2",
+                        "surface-bright": "#f7faf5",
+                        "on-surface-variant": "#3f4942",
+                        "surface-container-low": "#f1f5ef",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#753136",
+                        "on-primary-fixed-variant": "#005232",
+                        "surface-container-high": "#e6e9e4",
+                        "primary-fixed": "#a7f3c5",
+                        "on-tertiary-container": "#ffcccd",
+                        "surface-container": "#ecefe9",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#3c0700",
+                        "outline": "#707a71",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#bfc9c0",
+                        "on-primary": "#ffffff",
+                        "background": "#f7faf5",
+                        "primary": "#005232",
+                        "surface-tint": "#1e6b47",
+                        "primary-fixed-dim": "#8bd6aa",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2d312e",
+                        "on-tertiary-fixed": "#3c060e",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#181d19",
+                        "surface-variant": "#e0e3de",
+                        "on-secondary-container": "#661300",
+                        "primary-container": "#1e6b47",
+                        "secondary-container": "#ff6e49",
+                        "surface-dim": "#d8dbd6",
+                        "secondary": "#ad3313",
+                        "tertiary-container": "#92484c",
+                        "on-primary-container": "#9de9bb",
+                        "inverse-primary": "#8bd6aa",
+                        "tertiary-fixed": "#ffdada",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary-fixed-variant": "#891d00",
+                        "secondary-fixed-dim": "#ffb4a2",
+                        "inverse-on-surface": "#eef2ec",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3b4",
+                        "on-tertiary-fixed-variant": "#753136",
+                        "surface": "#f7faf5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "margin": "24px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-base": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "button": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "button": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="flex flex-col fixed left-0 top-0 h-full w-64 border-r border-[#E8E2D9] dark:border-slate-800 bg-[#FFFFFF] dark:bg-slate-900 z-40 hidden md:flex">
+<div class="p-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-container text-2xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">eco</span>
+<div>
+<h1 class="text-xl font-bold text-[#1E6B47] dark:text-emerald-400 tracking-tight">NutriSense AI</h1>
+<p class="font-body-sm text-body-sm text-outline">The Empathetic Expert</p>
+</div>
+</div>
+<div class="px-md mb-lg">
+<button class="w-full bg-primary-container text-on-primary font-button text-button py-sm px-md rounded-lg flex items-center justify-center gap-xs hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Log Meal
+            </button>
+</div>
+<ul class="flex-1 flex flex-col gap-xs px-sm">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-['Inter'] text-sm font-medium scale-98 active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#1E6B47] dark:text-emerald-400 bg-[#FDFAF5] dark:bg-emerald-950/30 border-r-4 border-[#1E6B47] transition-colors duration-200 font-['Inter'] text-sm font-medium scale-98 active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">photoscan</span>
+                    AI Scanner
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-['Inter'] text-sm font-medium scale-98 active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+                    NutriAI Chat
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-['Inter'] text-sm font-medium scale-98 active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                    Weekly Progress
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-['Inter'] text-sm font-medium scale-98 active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+                    Meal Plan
+                </a>
+</li>
+</ul>
+<div class="p-sm mt-auto border-t border-[#E8E2D9] dark:border-slate-800">
+<ul class="flex flex-col gap-xs">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-['Inter'] text-sm font-medium scale-98 active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Settings
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-[#6B6560] dark:text-slate-400 hover:bg-[#FDFAF5] dark:hover:bg-slate-800 transition-colors duration-200 font-['Inter'] text-sm font-medium scale-98 active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+                        Support
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-64 flex flex-col relative h-screen overflow-hidden">
+<!-- TopNavBar (Mobile Only for this specialized screen, or hidden completely in a full-screen app flow. Kept structural for continuity if needed, but the prompt asks for a full-width camera viewport. Let's overlay a minimal header.) -->
+<header class="absolute top-0 w-full z-10 flex justify-between items-center p-md bg-gradient-to-b from-black/50 to-transparent">
+<button class="md:hidden text-white w-10 h-10 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-sm">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="md:hidden">
+<span class="text-xl font-bold text-white tracking-tight">NutriSense AI</span>
+</div>
+<div class="w-10"></div> <!-- Spacer for flex alignment -->
+</header>
+<!-- Camera Viewport Area -->
+<div class="flex-1 relative bg-black flex flex-col">
+<!-- Simulated Camera Feed Background -->
+<img alt="camera feed showing a bowl of dal makhani on a wooden table" class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="Close up view of a copper bowl filled with rich, creamy Dal Makhani on a rustic wooden table, softly lit as if seen through a smartphone camera viewfinder." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTek57psPjettUahGZAxQRVgrhqHkEuZc6mQ6MUCmEEwPmCwBioK9It_hMMDMXWPhFpj_N86c6kYGH-Hctz0KTKcoWp2WOcV7WW8uDwni_J7JqET9SRaXoLxTkMdykd1cd-t65x0OhB4oJbhdKyHXdHw2sRfoVAtTKn7WNKWGngqFLxmwvZiLZBN2Z1wA6wOGTTIJoxXSDDG-GzPooVJmPXmEHtqUwzKMIujiQ8E5J3ZnitEGVWduqytdkzYHVLUqgt_vJ2H4sdt4"/>
+<!-- Corner Brackets Overlay -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none p-lg">
+<div class="w-full max-w-md aspect-square relative">
+<!-- Top Left -->
+<div class="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-white/70 rounded-tl-xl"></div>
+<!-- Top Right -->
+<div class="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-white/70 rounded-tr-xl"></div>
+<!-- Bottom Left -->
+<div class="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-white/70 rounded-bl-xl"></div>
+<!-- Bottom Right -->
+<div class="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-white/70 rounded-br-xl"></div>
+</div>
+</div>
+<!-- UI Overlay -->
+<div class="absolute inset-0 flex flex-col justify-between p-lg z-10">
+<div class="mt-xl text-center">
+<p class="font-body-base text-body-base text-white bg-black/40 backdrop-blur-md inline-block px-lg py-sm rounded-full shadow-lg">Position your food in the frame and click Scan</p>
+</div>
+<div class="mb-xl flex flex-col items-center gap-md">
+<button class="bg-[#E85D3A] text-white w-20 h-20 rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(232,93,58,0.4)] border-4 border-white/20 hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">camera</span>
+</button>
+<a class="font-button text-button text-white underline decoration-white/50 hover:decoration-white transition-all text-shadow-sm" href="#">Upload image instead</a>
+</div>
+</div>
+</div>
+<!-- Result Panel (Sliding in from right) -->
+<aside class="absolute right-0 top-0 h-full w-full max-w-[380px] bg-surface-container-lowest border-l border-[#E8E2D9] shadow-[-8px_0_24px_rgba(0,0,0,0.05)] z-20 flex flex-col transform transition-transform duration-300 translate-x-0 overflow-y-auto">
+<!-- Handle for mobile -->
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mt-sm md:hidden"></div>
+<div class="p-lg flex-1 flex flex-col gap-lg">
+<!-- Header -->
+<div class="flex justify-between items-start border-b border-[#E8E2D9] pb-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Dal Makhani</h2>
+<p class="font-body-sm text-body-sm text-outline mt-xs">Portion: 1 katori (200g)</p>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Health Score -->
+<div class="flex items-center gap-md bg-surface p-md rounded-xl border border-[#E8E2D9]">
+<div class="w-16 h-16 rounded-full bg-[#E85D3A]/10 border-2 border-[#E85D3A] flex items-center justify-center">
+<span class="font-display-lg text-display-lg text-[#E85D3A]">B+</span>
+</div>
+<div class="flex-1">
+<h3 class="font-title-sm text-title-sm text-on-surface">Health Score</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Good protein source but high in saturated fat. Moderate portion recommended.</p>
+</div>
+</div>
+<!-- Macros Row -->
+<div class="grid grid-cols-4 gap-sm">
+<div class="bg-surface-container-lowest border border-[#E8E2D9] rounded-lg p-sm text-center flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-outline block mb-xs">Cal</span>
+<span class="font-title-sm text-title-sm text-on-surface">320</span>
+</div>
+<div class="bg-surface-container-lowest border border-[#E8E2D9] rounded-lg p-sm text-center flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-outline block mb-xs">P</span>
+<span class="font-title-sm text-title-sm text-on-surface">12g</span>
+</div>
+<div class="bg-surface-container-lowest border border-[#E8E2D9] rounded-lg p-sm text-center flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-outline block mb-xs">C</span>
+<span class="font-title-sm text-title-sm text-on-surface">42g</span>
+</div>
+<div class="bg-surface-container-lowest border border-[#E8E2D9] rounded-lg p-sm text-center flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-outline block mb-xs">F</span>
+<span class="font-title-sm text-title-sm text-[#E85D3A]">18g</span>
+</div>
+</div>
+<!-- Smart Swap -->
+<div class="bg-surface-bright border-l-2 border-[#1E6B47] rounded-r-xl border border-y-[#E8E2D9] border-r-[#E8E2D9] p-md mt-sm">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-[#1E6B47] text-sm">lightbulb</span>
+<span class="font-label-caps text-label-caps text-[#1E6B47]">Smart Swap</span>
+</div>
+<h4 class="font-title-sm text-title-sm text-on-surface">Healthier swap → Dal Tadka</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Save 120 cal, same protein</p>
+</div>
+</div>
+<!-- Sticky Footer Actions -->
+<div class="p-lg bg-surface-container-lowest border-t border-[#E8E2D9] flex flex-col gap-sm">
+<button class="w-full bg-[#1E6B47] text-white font-button text-button py-sm px-md rounded-lg flex items-center justify-center gap-xs hover:bg-[#154d33] transition-colors">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    Log this meal
+                </button>
+<div class="grid grid-cols-2 gap-sm">
+<button class="w-full bg-surface-container text-on-surface font-button text-button py-sm px-md rounded-lg flex items-center justify-center gap-xs hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">info</span>
+                        See full nutrition
+                    </button>
+<button class="w-full border border-[#E8E2D9] text-on-surface font-button text-button py-sm px-md rounded-lg flex items-center justify-center gap-xs hover:bg-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+                        Try swap
+                    </button>
+</div>
+</div>
+</aside>
+</main>
+</body></html>
